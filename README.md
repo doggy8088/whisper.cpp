@@ -203,6 +203,15 @@ speed-up - more than x3 faster compared with CPU-only execution. Here are the in
 
   This will generate the folder `models/ggml-base.en-encoder.mlmodelc`
 
+  For Hugging Face Whisper fine-tunes, use the automation wrapper instead. For example:
+
+  ```bash
+  python3 -m pip install -r models/requirements-coreml.txt
+  ./models/convert-hf-whisper-model.sh MediaTek-Research/Breeze-ASR-25
+  ```
+
+  This will generate `models/ggml-breeze-asr-25.bin` and `models/ggml-breeze-asr-25-encoder.mlmodelc`.
+
 - Build `whisper.cpp` with Core ML support:
 
   ```bash

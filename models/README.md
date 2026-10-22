@@ -109,3 +109,31 @@ mv ggml-model.bin ggml-medium.en-distil.bin
 python3 ./convert-h5-to-ggml.py ./distil-large-v2/ ../../whisper .
 mv ggml-model.bin ggml-large-v2-distil.bin
 ```
+
+### Automated ggml + Core ML conversion for Hugging Face Whisper models
+
+On macOS, you can automate both the `ggml` `.bin` conversion and the encoder Core ML `.mlmodelc` compilation with:
+
+```bash
+python3 -m pip install -r models/requirements-coreml.txt
+./models/convert-hf-whisper-model.sh MediaTek-Research/Breeze-ASR-25
+```
+
+This produces:
+
+```text
+models/ggml-breeze-asr-25.bin
+models/ggml-breeze-asr-25-encoder.mlmodelc
+```
+
+The script will:
+
+- download or reuse the Hugging Face model snapshot
+- infer the matching base Whisper architecture used for Core ML export
+- generate artifact names that match whisper.cpp's `-encoder.mlmodelc` lookup rule
+
+If the base model cannot be inferred from `config.json`, pass it explicitly:
+
+```bash
+./models/convert-hf-whisper-model.sh <repo-or-dir> --base-model large-v2
+```

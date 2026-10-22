@@ -2,3 +2,6 @@ torch
 coremltools
 openai-whisper
 ane_transformers
+transformers
+huggingface_hub
+safetensors
